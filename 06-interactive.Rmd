@@ -2,7 +2,10 @@
 
 In this part, we utilize three types of interactive plots to further explore our data.
 
-In all the static plots in Results, it is hard to see how the ratio changes as time goes. Therefore, we first make interactive line plots to see how income proportion is distributed in different years. Following three plots are for all, male and female separately. You can place your mouse at the point to see the exact data (year, ratio and class for income). You can zoom the plot by choosing the area you want and return to the whole plot by double clicking. Also, you can remove or restore any line by clicking the legend on the right. From the first plot, we can observe a very interesting phenomena: the proportion of No Income increased sharply from 2009 to 2012 for more than 3%. Recall that previously we found that there was a slight decrease in the proportion of population that get a bachelor’s degree in 2011 and 2012. We suspect that the drop in bachelor's degree is attributed to financial situation negatively affected by the financial crisis in 2008. People who were to achieve bachelor's degree or planned to go university failed to do so because of their worsened financial. situation. After 2012, when the ratio for most classes still decreases or does not change much, there is a sharp increase in the proportion of earning the most (more than 75k). As we can see, a small amount of people was all of sudden much richer, probably owing to investment or roperty management during the crisis.
+In all the static plots in Results, it is hard to see how the ratio changes as time goes. Therefore, we first make interactive line plots to see how income proportion is distributed in different years. 
+Following three plots are for all gender, male and female respectively. You can place your mouse at the point to see the exact data (year, ratio and class for income). You can zoom the plot by choosing the area you want and return to the whole plot by double clicking. Also, you can remove or restore any line by clicking the legend on the right. 
+
+From the first plot, we can observe a very interesting phenomena: the proportion of No Income increased sharply from 2009 to 2012 for more than 3%. Recall that previously we found that there was a slight decrease in the proportion of population that get a bachelor’s degree in 2011 and 2012. We suspect that the drop in bachelor's degree is attributed to financial situation negatively affected by the financial crisis in 2008. People who were to achieve bachelor's degree or planned to go university failed to do so because of their worsened financial situation. After 2012, when the ratio for most classes still decreases or does not change much, there is a sharp increase in the proportion of earning the most (more than 75k). As we can see, a small amount of people was all of a sudden much richer, probably benefiting from investment or property management during the crisis.
 
 ```{r}
 library(dplyr)
@@ -74,7 +77,10 @@ ggplotly(fig2)
 
 ```
 
+The graph below is a parallel coordinate plot of different characteristics. You can switch the order of the bars clicking and holding the name above the bar(Year, Gender, etc) and drag it around. You can also filter the results by selecting a proportion of the bar. 
 
+
+Something we found interesting about this plot, is the result when we filtered on Population.Count. If you select the largest Population.Count(by selecting the few blue lines on top of the bar "Population.Count"), you will find that the largest group for all years are always males with a bachelor's degree and the highest income. By contrast, if you look for females with the same conditions:bachelor's degree and highest income, you'll find much smaller group sizes.This result shows that not only the proportion of high income male and female bachelors are different, but also the size of them are very different.
 
 ```{r}
 library(parcoords)
