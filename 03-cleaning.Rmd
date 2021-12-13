@@ -2,9 +2,10 @@
 
 
 ## we only focus on people aged 18 to 64 for the following reasons:
-1. Most children and elders don't make any income, and this is not affected by educational attainment and gender, which are the key variants we are studying for.
 
-2. There are missing data for age group 0 to 17 and over 65. But no missing data for population aged 18 to 64(see the missing data section).
+1. There are missing data for age group 0 to 17 and over 65. But no missing data for population aged 18 to 64(see the missing data section).
+
+2. Most children and elders don't make any income, and this is not affected by educational attainment and gender, which are the key variants we are studying for.
 
 
 
