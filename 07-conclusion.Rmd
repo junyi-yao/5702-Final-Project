@@ -1,2 +1,9 @@
 # Conclusion
 
+Firstly, we believe the proportion of the population that go to college is increasing, though we don't have enough data to make this conclusion. Similar proportion of male and female hold a bachelor's degree, while more women have some college experience.
+
+Secondly, it is very clear that education is having a very significant impact on personal income. This has been consistent during the years of our data source(2008-2014).
+
+Finally, we are very surprised to see how personal income differs for men and women with the same educational attainment. In specific, men with a bachelor's degree are much more likely to earn high income, while women with less than high school degree are much more likely to earn no income. This is a persistent issue during the years of our data source.
+
+

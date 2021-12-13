@@ -7,3 +7,16 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+In the past decades, people believed that college was the key to success. As a result, there seems to be increasing number of people going to college in these years. 
+
+Recently, however, I have seen articles claiming that the return of a college degree has been decreasing, due to increased tuition and increasing proportion of the population getting higher education. It's been very common to hear stories of people who have tens of thousands of dollars' student loan but don't make that much income. So is college degree depreciating?
+
+I'm wondering if college degree is still making much difference in people's income nowadays. So we got the data about education and income for California residents between 2008 and 2014.
+
+Our result shows that education still has a very significant impact on personal income, and this impact is consistent, which means a college degree is not depreciating. Surprisingly, we found that there is a huge and persistent gap between the male and female population: While similar proportion of men and women went to college, significantly larger proportion of male with a bachelor's degree make high income than their female counterparts. By contrast, a much larger proportion of female with no high school degree make no income than their male counterparts.
+
+The result was very shocking to me because I was under the impression that male and female are paid equally in the U.S.
+
+
+
+

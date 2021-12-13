@@ -24,7 +24,7 @@
 <meta name="author" content="Junyi Yao(jy3178), Yuezhu Xu(yx2693)" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,16 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
+<script src="libs/parcoords-binding-1.0.0/parcoords.js"></script>
+<script src="libs/d3-5.16.0/d3.min.js"></script>
 
 
 
@@ -75,7 +85,11 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#we-only-focus-on-people-aged-18-to-64-for-the-following-reasons"><i class="fa fa-check"></i><b>3.1</b> we only focus on people aged 18 to 64 for the following reasons:</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#we-also-make-plots-based-on-percentage-of-population"><i class="fa fa-check"></i><b>3.2</b> We also make plots based on percentage of population</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
@@ -101,6 +115,36 @@
             <section class="normal" id="section-">
 <div id="results" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
+<p>Firstly, let’s see the education attainments for male and female below.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Slightly larger proportion of women got bachelor’s degree or more. More women got some college degree(less than 3 years),while more men got high school or equivalent.</p>
+<p>But is it true that larger proportion of the population are getting higher education nowadays?
+<img src="finalproj_files/figure-html/Fig5-1.png" width="1440" /></p>
+<p>From our limited data, we can see that there was a slight decrease in the proportion of population that get a bachelor’s degree in 2011 and 2012, probably due to the financial hardship caused by the financial crisis in 2008. But the proportion soon got back and increased in 2013 and 2014.</p>
+<p>It’s hard to make a conclusion with our limited data but we believe the proportion is increasing.</p>
+<p>Then we explored the proportion of male and female that make different income with a specific degree.</p>
+<p><img src="finalproj_files/figure-html/Fig1-1.png" width="1440" /></p>
+<p>It is very clear that the proportion of high-incomers increases as degree advances. However, it is surprising to see such a huge gap between the proportion of male and female bachelors that make the highest income.</p>
+<p>Then we filtered out the population that makes the highest income to see the distribution of their education.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>it’s not surprising to see most of the high-income population hold a bachelor’s degree or more, while that proportion is slightly larger for females.</p>
+<p>For no-incomers:
+<img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>we can see that much larger proportion of female no-incomers did not complete their high school education.</p>
+<p>We are then interested in male and females that hold a bachelor’s degree. How much do male and female bachelors earn?</p>
+<p><img src="finalproj_files/figure-html/Fig2-1.png" width="1440" /></p>
+<pre><code>## $title
+## [1] &quot;Distribution of income for male and female bachelors&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<p>It is very clear that males with a bachelor’s degree are much much more likely to earn high income than their female counterparts!</p>
+<p>Now we want to see this for different educational attainment:</p>
+<p><img src="finalproj_files/figure-html/Fig3-1.png" width="1440" />
+We found that this situation is not only true for bachelors. For every educational attainment, we can see much more males with the highest income and more females make no income.</p>
+<p>We then also made alluvial diagram and stacked bar chart that give the same result:</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+We can see clearly that most of males that hold a bachelor’s degree or more earn high income, while most females who have less than high school degree make no income.</p>
 
 </div>
             </section>
@@ -140,7 +184,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/05-results.Rmd",
+"link": "https://github.com/junyi-yao/5702-Final-Project/edit/main/05-results.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -148,7 +192,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/05-results.Rmd",
+"link": "https://github.com/junyi-yao/5702-Final-Project/blob/main/05-results.Rmd",
 "text": null
 },
 "download": null,

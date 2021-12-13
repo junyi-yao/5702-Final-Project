@@ -24,7 +24,7 @@
 <meta name="author" content="Junyi Yao(jy3178), Yuezhu Xu(yx2693)" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,16 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/parallel-coordinates-2.1.8/parcoords.css" rel="stylesheet" />
+<script src="libs/parcoords-binding-1.0.0/parcoords.js"></script>
+<script src="libs/d3-5.16.0/d3.min.js"></script>
 
 
 
@@ -75,7 +85,11 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#we-only-focus-on-people-aged-18-to-64-for-the-following-reasons"><i class="fa fa-check"></i><b>3.1</b> we only focus on people aged 18 to 64 for the following reasons:</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#we-also-make-plots-based-on-percentage-of-population"><i class="fa fa-check"></i><b>3.2</b> We also make plots based on percentage of population</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
@@ -102,10 +116,15 @@
 <div id="header">
 <h1 class="title">Education and Income</h1>
 <p class="author"><em>Junyi Yao(jy3178), Yuezhu Xu(yx2693)</em></p>
-<p class="date"><em>2021-12-12</em></p>
+<p class="date"><em>2021-12-13</em></p>
 </div>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<p>In the past decades, people believed that college was the key to success. As a result, there seems to be increasing number of people going to college in these years.</p>
+<p>Recently, however, I have seen articles claiming that the return of a college degree has been decreasing, due to increased tuition and increasing proportion of the population getting higher education. It’s been very common to hear stories of people who have tens of thousands of dollars’ student loan but don’t make that much income. So is college degree depreciating?</p>
+<p>I’m wondering if college degree is still making much difference in people’s income nowadays. So we got the data about education and income for California residents between 2008 and 2014.</p>
+<p>Our result shows that education still has a very significant impact on personal income, and this impact is consistent, which means a college degree is not depreciating. Surprisingly, we found that there is a huge and persistent gap between the male and female population: While similar proportion of men and women went to college, significantly larger proportion of male with a bachelor’s degree make high income than their female counterparts. By contrast, a much larger proportion of female with no high school degree make no income than their male counterparts.</p>
+<p>The result was very shocking to me because I was under the impression that male and female are paid equally in the U.S.</p>
 
 </div>
             </section>
@@ -145,7 +164,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/index.Rmd",
+"link": "https://github.com/junyi-yao/5702-Final-Project/edit/main/index.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -153,7 +172,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/index.Rmd",
+"link": "https://github.com/junyi-yao/5702-Final-Project/blob/main/index.Rmd",
 "text": null
 },
 "download": null,

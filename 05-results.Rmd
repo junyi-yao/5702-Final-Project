@@ -1,1 +1,193 @@
 # Results
+
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(ggalluvial)
+library(patchwork)
+library(ggridges)
+
+data<-read.csv(file = 'ca-educational-attainment-personal-income-2008-2014.csv', header = TRUE)
+data_p<-data %>% filter(Age == '18 to 64')
+data_p$Educational.Attainment<-factor(data_p$Educational.Attainment,
+                                      levels = c("Bachelor's degree or higher","Some college, less than 4-yr degree",
+                                                 "High school or equivalent","No high school diploma"))
+data_p$Personal.Income<-factor(data_p$Personal.Income, 
+                               levels = c('$75,000 and over','$50,000 to $74,999','$35,000 to $49,999','$25,000 to $34,999',
+                                          '$15,000 to $24,999','$10,000 to $14,999','$5,000 to $9,999','No Income'))
+data_p$Year<-fct_recode(data_p$Year,
+                        "2008"='01/01/2008 12:00:00 AM',"2009"='01/01/2009 12:00:00 AM',
+                        "2010"='01/01/2010 12:00:00 AM',"2011"='01/01/2011 12:00:00 AM',
+                        "2012"='01/01/2012 12:00:00 AM',"2013"='01/01/2013 12:00:00 AM',
+                        "2014"='01/01/2014 12:00:00 AM')
+
+data_p$Educational.Attainment<- fct_recode(data_p$Educational.Attainment,
+                                           ">=Bachelor" = "Bachelor's degree or higher","College (<4year)" = "Some college, less than 4-yr degree",
+                                           "High school or equivalent" = "High school or equivalent","< high school" = "No high school diploma")
+data_p$Personal.Income<- fct_recode(data_p$Personal.Income,
+                                    "[75k,inf)"='$75,000 and over',"[50k,75k)"='$50,000 to $74,999',"[35k,50k)"='$35,000 to $49,999',
+                                    "[25k,35k)"='$25,000 to $34,999',"[15k,25k)"='$15,000 to $24,999',"[10k,15k)"='$10,000 to $14,999',
+                                    "[5k,10k)"='$5,000 to $9,999','No Income'='No Income')
+
+
+
+
+
+```
+
+Firstly, let's see the education attainments for male and female below. 
+
+```{r}
+population_education <- group_by(data_p,Gender,Educational.Attainment)%>%
+  summarise(population = sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+ggplot(population_education, aes(x = Educational.Attainment,y = percent))+
+  geom_col(fill = "lightblue")+
+  theme_grey(10)+
+  facet_grid(vars(Gender))+
+  ggtitle("Frequency of education attainment for different gender")
+
+
+```
+
+Slightly larger proportion of women got bachelor's degree or more. More women got some college degree(less than 3 years),while more men got high school or equivalent.
+
+But is it true that larger  proportion of the population are getting higher education nowadays?
+```{r Fig5, echo=FALSE, fig.height=12, fig.width=15}
+education_gender<- group_by(data_p, Gender, Year,  Educational.Attainment)%>%
+  summarise(population = sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+ggplot(education_gender, aes(x = Year,y = percent, fill = Educational.Attainment))+
+  geom_col(position = "dodge")+
+  theme_grey(10)+
+  facet_grid(vars(Gender))
+```
+
+From our limited data, we can see that there was a slight decrease in the proportion of population that get a bachelor's degree in 2011 and 2012, probably due to the financial hardship caused by the financial crisis in 2008. But the proportion soon got back and increased in 2013 and 2014.
+
+It's hard to make a conclusion with our limited data but we believe the proportion is increasing.
+
+
+Then we explored the proportion of male and female that make different income with a specific degree.
+
+```{r Fig1, echo=FALSE, fig.height=12, fig.width=15}
+populations <- group_by(data_p, Gender, Educational.Attainment, Personal.Income,)%>%
+  summarise(population = sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+
+ggplot(populations, aes(x = Personal.Income,y = percent))+
+  geom_col(fill = "lightblue")+
+  theme_grey(10)+
+  facet_grid(Educational.Attainment~Gender)+
+  ggtitle("Frequency of different income with respect to gender and Education")
+
+```
+
+
+It is very clear that the proportion of high-incomers increases as degree advances. However, it is surprising to see such a huge gap between the proportion of male and female bachelors that make the highest income. 
+
+Then we filtered out the population that makes the highest income to see the distribution of their education.
+
+```{r}
+highest_income <- filter(data_p, Personal.Income == "[75k,inf)")
+highest_population<-group_by(highest_income, Gender, Educational.Attainment )%>%
+  summarise(population=sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+ggplot(highest_population, aes(x = Educational.Attainment,y=percent))+
+  geom_col(fill = "lightblue")+
+  facet_grid(vars(Gender))+
+  ggtitle("Frequency of education for those who make high income")
+
+```
+
+it's not surprising to see most of the high-income population hold a bachelor's degree or more, while that proportion is slightly larger for females.
+
+For no-incomers:
+```{r}
+no_income <- filter(data_p, Personal.Income == "No Income")
+noIncome_population<-group_by(no_income, Gender, Educational.Attainment )%>%
+  summarise(population=sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+ggplot(noIncome_population, aes(x = Educational.Attainment,y=percent))+
+  geom_col(fill = "lightblue")+
+  facet_grid(vars(Gender))+
+  ggtitle("Frequency of education for those who make no income")
+
+```
+
+we can see that much larger proportion of female no-incomers did not complete their high school education.
+
+
+We are then interested in male and females that hold a bachelor's degree. How much do male and female bachelors earn?
+
+```{r Fig2, echo=FALSE, fig.height=12, fig.width=15}
+bachelors <- filter(data_p,Educational.Attainment == ">=Bachelor")
+
+population_bachelor <- group_by(bachelors, Year, Gender, Personal.Income)%>%
+  summarise(population = sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+ggplot(population_bachelor, aes(x = Personal.Income,y = percent))+
+  geom_col(fill = "steelblue")+
+  theme_grey(10)+
+  facet_grid(Year~Gender)
+  ggtitle("Distribution of income for male and female bachelors")
+
+```
+
+It is very clear that males with a bachelor's degree are much much more likely to earn high income than their female counterparts!
+
+
+Now we want to see this for different educational attainment:
+
+```{r Fig3, echo=FALSE, fig.height=12, fig.width=15}
+
+grouped_bar <- group_by(data_p, Gender, Educational.Attainment, Personal.Income,)%>%
+  summarise(population = sum(Population.Count))%>%
+  mutate(percent = population/sum(population))
+ggplot(grouped_bar, aes(x = Personal.Income,y = percent, fill = Gender))+
+  geom_col(position = "dodge")+
+  theme_grey(10)+
+  facet_grid(vars(Educational.Attainment))
+
+```
+We found that this situation is not only true for bachelors. For every educational attainment, we can see much more males with the highest income and more females make no income.
+
+We then also made alluvial diagram and stacked bar chart that give the same result:
+
+```{r}
+
+plot_alluvial<-function(year=0){
+  if (!year==0){
+    data_alluvial <- data_p %>% filter(Year == year) %>%
+      group_by(Gender, Educational.Attainment, Personal.Income) %>%
+      summarise(Freq = sum(Population.Count)) %>% ungroup()
+  }else{
+    data_alluvial <- data_p %>% group_by(Gender, Educational.Attainment, Personal.Income) %>%
+      summarise(Freq = sum(Population.Count)) %>% ungroup()
+    
+  }
+  
+p<-ggplot(data = data_alluvial, aes(y = Freq, axis1 = Gender, axis2 = Educational.Attainment,
+                                 axis3 = Personal.Income))+
+  geom_alluvium(aes(fill = Gender), width = 1/6) +
+  geom_stratum(width = 1/12, fill = "grey80", color = "grey") +
+  geom_label(stat = "stratum", 
+             aes(label = after_stat(stratum))) +
+  scale_x_discrete(expand = c(.05, .05)) +
+  scale_fill_brewer(type = "qual", palette = "Set1") +
+  ggtitle("") +
+  theme_void()
+  
+  return (p)
+}
+
+plot_alluvial()
+
+```
+We can see clearly that most of males that hold a bachelor's degree or more earn high income, while most females who have less than high school degree make no income.
+
+
+

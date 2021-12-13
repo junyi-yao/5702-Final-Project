@@ -1,6 +1,8 @@
 introduction
 data-sources
 data-transformation
+we-only-focus-on-people-aged-18-to-64-for-the-following-reasons
+we-also-make-plots-based-on-percentage-of-population
 missing-values
 results
 interactive-component
