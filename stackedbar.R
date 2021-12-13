@@ -7,7 +7,8 @@ library(RColorBrewer)
 
 #filter on data_p when making function
 #make it a function
-plot_stackedbar<-function(year = 0){
+
+data_stackedbar<-function(year = 0){
   if(year == 0){
   data_stack <- data_p  %>% 
     group_by(Educational.Attainment, Personal.Income) %>%
@@ -16,12 +17,17 @@ plot_stackedbar<-function(year = 0){
   data_stack <- data_p %>% filter(Year == year) %>% group_by(Educational.Attainment, Personal.Income) %>%
   summarise(Freq = sum(Population.Count)) %>% ungroup()
   }
+
+return (data_stack)
+}
+
+plot_stackedbar<-function(year){
+data_stack = data_stackedbar(year)
 colors <- rev(brewer.pal(8,'Blues'))
 mosaic(Personal.Income ~ Educational.Attainment ,direction = c('v','h'), 
        data_stack,  highlighting_fill = colors,
        labeling = labeling_border(tl_labels = c(TRUE,TRUE), rot_labels = c(5,0,0,60)))
 }
-
 plot_stackedbar()
 #draw supposed graph
 data_supposed <- data_stack %>% mutate(all = sum(Freq)) %>%
