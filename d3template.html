@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+		<meta charset="utf-8">
+		<title>d3templete</title>
+		<script src="https://d3js.org/d3.v7.js"></script>
+	</head>
+
+	<body>
+	 
+  
+  
+  <h2> Proportion of high salary for different gender</h2>
+  <p>
+  <button class = 'year' type = '2008'> 2008 </button>
+  <button class = 'year' type = '2009'> 2009 </button>
+  <button class = 'year' type = '2010'> 2010 </button>
+  <button class = 'year' type = '2011'> 2011 </button>
+  <button class = 'year' type = '2012'> 2012 </button>
+  <button class = 'year' type = '2013'> 2013 </button>
+  <button class = 'year' type = '2014'> 2014 </button>
+  </p> 
+  
+	<script>
+  var w = 500;
+  var h = 400;
+  var margin = {top: 25, right: 25, bottom: 25, left: 50};
+  var innerWidth = w - margin.left - margin.right;
+  var innerHeight = h - margin.top - margin.bottom;
+  var dur = 500;
+  
+  var svg = d3.select("body")
+    .append("svg")
+      .attr("width", w)
+      .attr("height", h);
+
+  svg.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", w)
+      .attr("height", h)
+      .attr("fill", "lightblue");
+
+  //too much data, ho to import?
+  bardata = d3.text('https://github.com/junyi-yao/5702-Final-Project/blob/main/data.txt');
+  console.log(bardata);//[{'Year': 2008, 'Education': '< high school', 'Income': 'No Income', 'All Gender': 1001315, 'ratio': 0.35315368250573476}, {'Year': 2008, 'Education': '< high school', 'Income': '[5k,10k)', 'All Gender': 415772, 'ratio': 0.2652923453090883}, {'Year': 2008, 'Education': '< high school', 'Income': '[10k,15k)', 'All Gender': 546840, 'ratio': 0.3013583278591677}, {'Year': 2008, 'Education': '< high school', 'Income': '[15k,25k)', 'All Gender': 890812, 'ratio': 0.2720610669304577}, {'Year': 2008, 'Education': '< high school', 'Income': '[25k,35k)', 'All Gender': 427562, 'ratio': 0.16282431614183274}, {'Year': 2008, 'Education': '< high school', 'Income': '[35k,50k)', 'All Gender': 274360, 'ratio': 0.09259346756393728}, {'Year': 2008, 'Education': '< high school', 'Income': '[50k,75k)', 'All Gender': 124392, 'ratio': 0.04040075973902808}, {'Year': 2008, 'Education': '< high school', 'Income': '[75k,inf)', 'All Gender': 48524, 'ratio': 0.01526342973581848}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': 'No Income', 'All Gender': 825431, 'ratio': 0.2911211729619462}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[5k,10k)', 'All Gender': 429222, 'ratio': 0.273874409624163}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[10k,15k)', 'All Gender': 471637, 'ratio': 0.2599146691473087}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[15k,25k)', 'All Gender': 922006, 'ratio': 0.2815879625288878}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[25k,35k)', 'All Gender': 726605, 'ratio': 0.27670598002216373}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[35k,50k)', 'All Gender': 721793, 'ratio': 0.24359715969302007}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[50k,75k)', 'All Gender': 555617, 'ratio': 0.1804565319628237}, {'Year': 2008, 'Education': 'High school or equivalent', 'Income': '[75k,inf)', 'All Gender': 234454, 'ratio': 0.07374849878990986}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': 'No Income', 'All Gender': 689385, 'ratio': 0.24313912346685704}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[5k,10k)', 'All Gender': 538569, 'ratio': 0.3436456353981759}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[10k,15k)', 'All Gender': 559411, 'ratio': 0.308286086507982}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[15k,25k)', 'All Gender': 914253, 'ratio': 0.2792201346910142}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[25k,35k)', 'All Gender': 915142, 'ratio': 0.3485047088437913}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[35k,50k)', 'All Gender': 1076321, 'ratio': 0.36324644117905136}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[50k,75k)', 'All Gender': 937518, 'ratio': 0.30449256760092397}, {'Year': 2008, 'Education': 'College (<4year)', 'Income': '[75k,inf)', 'All Gender': 658347, 'ratio': 0.20708583744717848}, {'Year': 2008, 'Education': '>=Bachelor', 'Income': 'No Income', 'All Gender': 319221, 'ratio': 0.11258602106546206}, {'Year': 2008, 'Education': '>=Bachelor', 'Income': '[5k,10k)', 'All Gender': 183659, 'ratio': 0.1171876096685728},{'Year': 2009, 'Education': 'College (<4year)', 'Income': '[10k,15k)', 'All Gender': 658692, 'ratio': 0.3564686285397002}, {'Year': 2009, 'Education': 'College (<4year)', 'Income': '[15k,25k)', 'All Gender': 1039512, 'ratio': 0.3056617787810543}, {'Year': 2009, 'Education': 'College (<4year)', 'Income': '[25k,35k)', 'All Gender': 829863, 'ratio': 0.3248979045323693}, {'Year': 2009, 'Education': 'College (<4year)', 'Income': '[35k,50k)', 'All Gender': 946958, 'ratio': 0.33789433607597713}, {'Year': 2009, 'Education': 'College (<4year)', 'Income': '[50k,75k)', 'All Gender': 931319, 'ratio': 0.3134521508039936}, {'Year': 2009, 'Education': 'College (<4year)', 'Income': '[75k,inf)', 'All Gender': 721700, 'ratio': 0.22483384352162636}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': 'No Income', 'All Gender': 331842, 'ratio': 0.12368946021863203}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': '[5k,10k)', 'All Gender': 231115, 'ratio': 0.13266619940886723}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': '[10k,15k)', 'All Gender': 220482, 'ratio': 0.11931967620327888}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': '[15k,25k)', 'All Gender': 513224, 'ratio': 0.15091019704739128}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': '[25k,35k)', 'All Gender': 571329, 'ratio': 0.22367980606265614}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': '[35k,50k)', 'All Gender': 861834, 'ratio': 0.3075203200540084}, {'Year': 2009, 'Education': '>=Bachelor', 'Income': '[50k,75k)', 'All Gender': 1449788, 'ratio': 0.48795221273250117}]//不全
+  //[{year: 2008, gender:'male', ratio:0.1}, {year: 2008, gender:'female', ratio:0.1},
+  //{year: 2009, gender:'male', ratio:0.2}, {year: 2009, gender:'female', ratio:0.5}]
+  //{2008:[0.1,0.1], 2009:[0.2,0.5]}
+  
+  var bardata2008 = bardata.filter(d=>d.Year==2008)
+      //.map((value, key) => ({key, value}));
+
+  var xScale = d3.scaleLinear()
+      .domain([0, 1])
+      .range([0,innerWidth]);
+      
+  var yScale = d3.scaleBand()
+      .domain(['>=Bachelor','College (<4year)','< high school','High school or equivalent'])
+      //d3.range(bardata2008.length))
+      .range([0, innerHeight])
+      .paddingInner(.1);
+      
+  var xAxis = d3.axisBottom()
+      .scale(xScale);
+
+  var yAxis = d3.axisLeft()
+      .scale(yScale);
+
+  //global variable
+  //var year = 2008
+  
+  var bar = svg.append("g")
+      .attr("id", "column")
+      .attr("transform", `translate (${margin.left}, ${margin.top})`)
+      .selectAll("rect")
+      .data(bardata2008);//, d => d.key);
+      
+  bar.enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", 0)
+      .attr("y", d => yScale(d.Education))
+      .attr("width", d =>  xScale(d.ratio))
+      .attr("height",  yScale.bandwidth())
+      .attr("fill","blue")
+
+    //useful function, later
+    
+    d3.selectAll('button.year').on('click', update)
+    function update(){
+      year =  d3.select(this).attr('type');//d3.pointer(event)[0];
+      newdata = bardata.filter(d=>d.Year==year);
+      svg.selectAll('.bar').data(newdata).transition().duration(2000).attr('width', d => xScale(d.ratio));
+    }
+  
+  svg.append("g")
+      .attr("class", "xAxis")
+      .attr("transform", `translate (${margin.left}, ${h - margin.bottom})`)
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "yAxis")
+      .attr("transform", `translate (${margin.left}, ${margin.top})`)
+      .call(yAxis);
+  
+  
+	</script>
+		
+		
+	</body>
+
+</html>
