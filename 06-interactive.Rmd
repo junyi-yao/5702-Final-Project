@@ -1,4 +1,9 @@
 # Interactive component
+
+In this part, we utilize three types of interactive plots to further explore our data.
+
+In all the static plots in Results, it is hard to see how the ratio changes as time goes. Therefore, we first make interactive line plots to see how income proportion is distributed in different years. Following three plots are for all, male and female separately. You can place your mouse at the point to see the exact data (year, ratio and class for income). You can zoom the plot by choosing the area you want and return to the whole plot by double clicking. Also, you can remove or restore any line by clicking the legend on the right. From the first plot, we can observe a very interesting phenomena: the proportion of No Income increased sharply from 2009 to 2012 for more than 3%. Recall that previously we found that there was a slight decrease in the proportion of population that get a bachelor’s degree in 2011 and 2012. We suspect that the drop in bachelor's degree is attributed to financial situation negatively affected by the financial crisis in 2008. People who were to achieve bachelor's degree or planned to go university failed to do so because of their worsened financial. situation. After 2012, when the ratio for most classes still decreases or does not change much, there is a sharp increase in the proportion of earning the most (more than 75k). As we can see, a small amount of people was all of sudden much richer, probably owing to investment or roperty management during the crisis.
+
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -6,6 +11,9 @@ library(tidyverse)
 library(ggalluvial)
 library(patchwork)
 library(ggridges)
+library(RColorBrewer)
+
+
 
 data<-read.csv(file = 'ca-educational-attainment-personal-income-2008-2014.csv', header = TRUE)
 data_p<-data %>% filter(Age == '18 to 64')
@@ -43,13 +51,14 @@ data_inter<-data_p %>% group_by(Year, Personal.Income) %>%  #if we study gender,
   mutate(year_total = sum(Population.Count)) %>% ungroup() %>%
   summarise(Year = Year, Personal.Income = Personal.Income, ratio = total/year_total) %>% 
   unique()
-
+colors<-rev(brewer.pal(9, 'Blues'))
 fig1 <- ggplot(data_inter) + geom_point(aes(x = Year, y = ratio, color = Personal.Income))+
-  geom_line(aes(x = Year, y = ratio, group = Personal.Income, color = Personal.Income))
+  geom_line(aes(x = Year, y = ratio, group = Personal.Income, color = Personal.Income))+
+  scale_colour_manual(values = colors[1:8])+theme_classic()
 
 ggplotly(fig1)
 ```
-
+To continue to explore whether gender counts in the trend of income distribution, we draw the same plot for female and male separately. Generally, the distribution follows the same pattern for two genders. Also we can again clearly  observe that women earns much less than men all the time.
 ```{r}
 data_inter_gender<-data_p %>% group_by(Gender,Year, Personal.Income) %>%  #if we study gender, add Gender
   mutate(total = sum(Population.Count)) %>% group_by(Gender, Year) %>% 
@@ -58,7 +67,7 @@ data_inter_gender<-data_p %>% group_by(Gender,Year, Personal.Income) %>%  #if we
   unique()
 
 fig2 <- ggplot(data_inter_gender) + geom_point(aes(x = Year, y = ratio, color = Personal.Income))+
-  geom_line(aes(x = Year, y = ratio, group = Personal.Income, color = Personal.Income))+facet_grid(~Gender)
+  geom_line(aes(x = Year, y = ratio, group = Personal.Income, color = Personal.Income))+facet_grid(~Gender)+scale_colour_manual(values = colors[1:8])+theme_classic()
 
 ggplotly(fig2)
 
