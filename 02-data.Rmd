@@ -5,3 +5,5 @@ We got out data from California's open data portal:
 
 
 Each row contains Year, Age, Gender, Educational Attainment, Personal income, and the number of people with the characteristics specified in the row.
+
+![example for the data source](data_example.png "example for our data")
