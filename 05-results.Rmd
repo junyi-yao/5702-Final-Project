@@ -1,6 +1,5 @@
 # Results
 
-
 ```{r}
 
 library(dplyr)
@@ -214,6 +213,7 @@ plot_alluvial()
 
 
 We can see clearly that most of males that hold a bachelor's degree or more earn high income, while most females who have less than high school degree make no income.
+
 
 
 

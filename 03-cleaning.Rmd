@@ -14,6 +14,9 @@
 We don't want our data to be affected by the size of different populations. When we compare the population with respect to gender and educational attainment, we always compare the percentage of the specific population that make high(or low) income. When we compute the difference between genders, we always compute the difference in percentage(not in numbers).
 
 
+## We replace the class name in educational attainments and income with shorter ones
+In this way there will be less overlap in plots so that we can observe the plots better. Concretely for educational attainments, ">=Bachelor" represents "Bachelor's degree or higher", "College (<4year)" represents "Some college, less than 4-yr degree", "=High school" represents "High school or equivalent" and "<High school" represents "No high school diploma". Also for income, "[75k,inf)" means '\$75,000 and over',"[50k,75k)" means '$50,000 to $74,999' and likewise.
+
 
 
 

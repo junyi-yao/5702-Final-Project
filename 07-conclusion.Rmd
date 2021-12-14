@@ -4,6 +4,9 @@ Firstly, we believe the proportion of the population that go to college is incre
 
 Secondly, it is very clear that education is having a very significant impact on personal income. This has been consistent during the years of our data source(2008-2014).
 
-Finally, we are very surprised to see how personal income differs for men and women with the same educational attainment. In specific, men with a bachelor's degree are much more likely to earn high income, while women with less than high school degree are much more likely to earn no income. This is a persistent issue during the years of our data source.
+Also, we are very surprised to see how personal income differs for men and women with the same educational attainment. In specific, men with a bachelor's degree are much more likely to earn high income, while women with less than high school degree are much more likely to earn no income. This is a persistent issue during the years of our data source.
+
+The proportion of No Income increased sharply from 2009 to 2012, which was probably affected by the financial crisis and it matches with decrease in the proportion of population with bachelor’s degree in 2011 and 2012. Meanwhile, a small amount of people was all of a sudden much richer after the period.
 
 
+Finally, from the variation of relation between diploma and income subject to year, we found that education was becoming more and more important in earning big money. At the same time, possessing certain diploma was having less and less guarantee for income.
